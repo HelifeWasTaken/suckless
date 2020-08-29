@@ -14,9 +14,9 @@ To compile :
 > (no need for now but I might add python or other stuff in it to be sure)
 
 Apps that I use at dwm startup : 
-- nitrogen (Gives me my background)
+- feh (Gives me my background)
 - xcompmgr (Enable RGBA)
 
-For nitrogen if you never used it before you will need to chose at least once an image trough the manager or with `nitrogen --set-auto <pathtoimage>`
+In order to change the wallpaper you can change the path or command in `suckless/dwm/dwm.c` search for `system ("feh --bg-fill ~/.config/wall.png &");` or just change/add the image and reload the wm
 
 > I might change nitrogen for something lighter
