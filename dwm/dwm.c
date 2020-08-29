@@ -1409,7 +1409,7 @@ run(void)
 
 void
 runAutostart(void) {
-	system ("nitrogen --restore &");
+	system ("feh --bg-fill ~/.config/wall.png &");
 	system ("xcompmgr &");
 	system ("slstatus &");
 }

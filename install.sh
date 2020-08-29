@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-DEPENDENCIES=nitrogen\ xcompmgr\ gcc\ make
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make
 
 download_package()
 {
