@@ -10,15 +10,18 @@ if [ ! -f "/usr/bin/nitrogen" ]; then
 	echo "You may have unexpected behaviour"
 fi
 
-sh dmenu/install.sh
-sh dwm/install.sh
+cd dmenu && sh install.sh && cd ..
+pwd
+cd dwm && sh install.sh && cd ..
+pwd
 
 if [ -f "/etc/fedora-release" ]; then
 	echo "This slock build is not compatible with fedora but I will download the base one for you"
 	sudo dnf install slock -y
 else
-	sh slock/install.sh
+	cd slock && sh install.sh && cd ..
 fi
+pwd
 
-sh st/install.sh
-sh slstatus/install.sh
+cd st && sh install.sh && cd ..
+cd slstatus && sh install.sh && cd ..
