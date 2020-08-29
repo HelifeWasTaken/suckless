@@ -1411,6 +1411,7 @@ void
 runAutostart(void) {
 	system ("nitrogen --restore &");
 	system ("xcompmgr &");
+	system ("slstatus &");
 }
 
 void
