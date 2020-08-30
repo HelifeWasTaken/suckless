@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ ffplay
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ ffmpeg
 
 download_package()
 {
