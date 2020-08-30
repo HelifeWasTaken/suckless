@@ -36,6 +36,12 @@ check_package()
 		echo "ERROR : You do not have make to link the build automatically"
 		exit 1
 	fi
+	
+	if [ ! -f "~/.config/wall.png" ];
+	then
+		echo "WARNING : Did not found a wallpaper in ~/.config/wall.png setting up the default one of this build"
+		mv wall.png ~/.config/wall.png
+	fi
 }
 
 build()
