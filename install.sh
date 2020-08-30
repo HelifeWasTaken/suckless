@@ -58,7 +58,7 @@ check_optional()
 create_xinitrc()
 {
 	touch ~/.xinitrc
-	echo -e "exec slstatus &\nexec dwm" >> ~/.xinitrc
+	echo -e "exec slstatus &\nexec dwm" > ~/.xinitrc
 }
 
 build()
