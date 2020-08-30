@@ -6,9 +6,10 @@ slstatus is a suckless status monitor for window managers that use WM_NAME
 
 Features
 --------
-- Battery percentage/state/time left
+- Battery percentage/power/state
 - CPU usage
 - CPU frequency
+- CPU iowait
 - Custom shell commands
 - Date and time
 - Disk status (free storage, percentage, total storage and used storage)
@@ -18,9 +19,7 @@ Features
 - IP address (IPv4 and IPv6)
 - Kernel version
 - Keyboard indicators
-- Keymap
 - Load average
-- Network speeds (RX and TX)
 - Number of files in a directory (hint: Maildir)
 - Memory status (free memory, percentage, total memory and used memory)
 - Swap status (free swap, percentage, total swap and used swap)
@@ -32,7 +31,6 @@ Features
 
 Requirements
 ------------
-Currently slstatus works on FreeBSD, Linux and OpenBSD.
 In order to build slstatus you need the Xlib header files.
 
 
@@ -60,4 +58,15 @@ source code. This keeps it fast, secure and simple.
 
 Todo
 ----
-Cleaning up the whole codebase it the goal before thinking about a release.
+Porting to OpenBSD is the current goal before thinking about a release.
+
+The following functions are not portable at the moment:
+- ipv{4,6}
+- ram_{free,perc,total,used}
+- wifi_{perc,essid}
+- cpu_{freq,perc,iowait}
+- entropy
+- swap_{free,perc,total,used}
+- battery_{power,state}
+- temp
+- vol_perc

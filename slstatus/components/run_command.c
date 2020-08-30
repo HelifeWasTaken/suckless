@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -10,21 +11,17 @@ run_command(const char *cmd)
 	char *p;
 	FILE *fp;
 
-	if (!(fp = popen(cmd, "r"))) {
-		warn("popen '%s':", cmd);
+	fp = popen(cmd, "r");
+	if (fp == NULL) {
+		fprintf(stderr, "popen '%s': %s\n", cmd, strerror(errno));
 		return NULL;
 	}
 	p = fgets(buf, sizeof(buf) - 1, fp);
-	if (pclose(fp) < 0) {
-		warn("pclose '%s':", cmd);
+	pclose(fp);
+	if (!p)
 		return NULL;
-	}
-	if (!p) {
-		return NULL;
-	}
-	if ((p = strrchr(buf, '\n'))) {
+	if ((p = strrchr(buf, '\n')) != NULL)
 		p[0] = '\0';
-	}
 
 	return buf[0] ? buf : NULL;
 }

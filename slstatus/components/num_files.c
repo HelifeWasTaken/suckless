@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
@@ -6,22 +7,20 @@
 #include "../util.h"
 
 const char *
-num_files(const char *path)
+num_files(const char *dir)
 {
 	struct dirent *dp;
 	DIR *fd;
-	int num;
+	int num = 0;
 
-	if (!(fd = opendir(path))) {
-		warn("opendir '%s':", path);
+	if ((fd = opendir(dir)) == NULL) {
+		fprintf(stderr, "opendir '%s': %s\n", dir, strerror(errno));
 		return NULL;
 	}
 
-	num = 0;
-	while ((dp = readdir(fd))) {
-		if (!strcmp(dp->d_name, ".") || !strcmp(dp->d_name, "..")) {
+	while ((dp = readdir(fd)) != NULL) {
+		if (!strcmp(dp->d_name, ".") || !strcmp(dp->d_name, ".."))
 			continue; /* skip self and parent */
-		}
 		num++;
 	}
 
