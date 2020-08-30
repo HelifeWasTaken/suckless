@@ -3,5 +3,4 @@ if [ -f "/etc/fedora-release" ]; then
 else
 	sed -i -e '/s/nobody/nogroup/g' config.def.h
 fi
-
 make && sudo make install && make clean
