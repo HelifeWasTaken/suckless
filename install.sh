@@ -49,14 +49,6 @@ build()
 
 	cd dmenu && sh install.sh && cd ..
 	cd dwm && sh install.sh && cd ..
-
-	if [ -f "/etc/fedora-release" ]; then
-		echo "This slock build is not compatible with fedora but I will download the base one for you"
-		sudo dnf install slock -y
-	else
-		cd slock && sh install.sh && cd ..
-	fi
-
 	cd st && sh install.sh && cd ..
 	cd slstatus && sh install.sh && cd ..
 }
