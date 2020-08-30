@@ -55,5 +55,5 @@ static const struct arg args[] = {
 	{ battery_perc, "[BAT %2s%%] ", "BAT0"    },
 	{ battery_state, "[CHR %s] ", "BAT0"    },
 	{ disk_perc, "[HD %s%%] ", "/"    },
-	{ datetime, "[%s] [Version : Helife suckless 0.9b]", "%F %H:%M" },
+	{ datetime, "[%s] [Version : Helife suckless 0.9b]", "%F %H:%M:%S" },
 };

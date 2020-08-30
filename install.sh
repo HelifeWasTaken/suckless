@@ -13,16 +13,11 @@ download_package()
 	echo "Did not found your package manager to check the dependencies"
 }  
 
-check_package()
+check_essential()
 {
 	if [ ! -f "/usr/bin/xcompmgr" ]; then
-		echo "WARNING : You do not have xcompmgr installed"
-		echo "You may have unexpected behaviour"
-	fi
-
-	if [ ! -f "/usr/bin/nitrogen" ]; then
-		echo "WARNING : You do not have nitrogen installed"
-		echo "You may have unexpected behaviour"
+		echo "ERROR : You do not have xcompmgr installed"
+		exit 1
 	fi
 
 	if [ ! -f "/usr/bin/gcc" ]; then
@@ -33,20 +28,32 @@ check_package()
 	fi
 
 	if [ ! -f "/usr/bin/make" ]; then
-		echo "ERROR : You do not have make to link the build automatically"
+		echo "ERROR : You do not have make to compile the build"
 		exit 1
 	fi
-	
-	if [ ! -f "~/.config/wall.png" ];
-	then
+}
+
+check_optional()
+{
+	if [ ! -f "/usr/bin/feh" ]; then
+		echo "WARNING : You do not have feh installed"
+		echo "You may experience unexpected behaviour"
+	fi
+		
+	if [ ! -f "~/.config/wall.png" ]; then
 		echo "WARNING : Did not found a wallpaper in ~/.config/wall.png setting up the default one of this build"
 		mv wall.png ~/.config/wall.png
 	fi
 
-	if [ -f "/usr/bin/dash" ];
-	then
+	if [ -f "/usr/bin/dash" ]; then
 		ln -svf dash /bin/sh
 	fi
+}
+
+create_xinitrc()
+{
+	touch ~/.xinitrc
+	echo -e "exec slstatus &\nexec dwm" >> ~/.xinitrc
 }
 
 build()
@@ -61,8 +68,10 @@ build()
 main()
 {
 	download_package
-	check_package
+	check_essential
+	check_optional
 	build
+	create_xinitrc
 }
 
 main
