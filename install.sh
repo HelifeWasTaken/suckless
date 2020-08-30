@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-DEPENDENCIES=feh\ xcompmgr\ gcc\ make
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ ffplay
 
 download_package()
 {
@@ -41,6 +41,11 @@ check_package()
 	then
 		echo "WARNING : Did not found a wallpaper in ~/.config/wall.png setting up the default one of this build"
 		mv wall.png ~/.config/wall.png
+	fi
+
+	if [ -f "/usr/bin/dash" ];
+	then
+		ln -svf dash /bin/sh
 	fi
 }
 
