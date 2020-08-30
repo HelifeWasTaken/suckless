@@ -30,7 +30,6 @@ static const char *mutevolume[]	= { "/usr/bin/pactl", "set-sink-mute",   "0", "t
 /* tagging */
 
 #define webapp "firefox"
-static const char *duckduckgo[] = { webapp, "duckduckgo.com", NULL };
 static const char *youtube[] = { webapp, "youtube.com", NULL };
 static const char *github[] = { webapp, "github.com", NULL };
 static const char *suckless[] = { webapp, "suckless.org", NULL };
@@ -39,7 +38,6 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Launcher launchers[] = {
 	/* command 	Name */
-	{ duckduckgo,	"duckduckgo" },
 	{ youtube,	"youtube" },
 	{ github,	"github" },
 	{ suckless,	"suckless" },
@@ -113,16 +111,16 @@ static Key keys[] = {
 	{ 0,                      	XF86XK_AudioLowerVolume,   spawn, {.v = downvolume } },
 	{ 0,                       	XF86XK_AudioRaiseVolume,   spawn, {.v = upvolume   } },
 	{ 0,                       	XF86XK_AudioMute,   	   spawn, {.v = mutevolume } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ControlMask,           XK_q,      quit,           {0} },
+	
+	TAGKEYS(                        XK_ampersand,              0)
+	TAGKEYS(                        XK_eacute,                 1)
+	TAGKEYS(                        XK_quotedbl,               2)
+	TAGKEYS(                        XK_apostrophe,             3)
+	TAGKEYS(                        XK_parenleft,              4)
+	TAGKEYS(                        XK_minus,                  5)
+	TAGKEYS(                        XK_egrave,                 6)
+	TAGKEYS(                        XK_underscore,             7)
+	TAGKEYS(                        XK_ccedilla,                8)
 };
 
 /* button definitions */
