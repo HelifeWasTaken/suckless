@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ ffmpeg\ libxcb\ libXft\ libX11\ libXft\ libXinerama
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ libxcb\ libXft\ libX11\ libXft\ libXinerama-devel\ libXinerama\ libX11-devel\ libXft-devel
 
 download_package()
 {
@@ -40,6 +40,11 @@ check_optional()
 		echo "You may experience unexpected behaviour"
 	fi
 		
+	if [ ! -f "/usr/bin/ffmpeg" ]; then
+		echo "WARNING : You do not have ffmpeg installed"
+		echo "You may experience unexpected behaviour"
+	fi
+
 	if [ ! -f "~/.config/wall.png" ]; then
 		echo "WARNING : Did not found a wallpaper in ~/.config/wall.png setting up the default one of this build"
 		mv wall.png ~/.config/wall.png
