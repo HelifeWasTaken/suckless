@@ -89,7 +89,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ControlMask,		XK_l,	   spawn,	   {.v = locker } },
+	{ MODKEY|ControlMask,		    XK_l,	   spawn,	   {.v = locker } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -111,7 +111,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ControlMask,		XK_q,	   quit,	   {0} },
+	{ MODKEY|ControlMask,		    XK_q,	   quit,	   {0} },
 	{ 0,                      	XF86XK_AudioLowerVolume,   spawn, {.v = downvolume } },
 	{ 0,                       	XF86XK_AudioRaiseVolume,   spawn, {.v = upvolume   } },
 	{ 0,                       	XF86XK_AudioMute,   	   spawn, {.v = mutevolume } },
@@ -124,7 +124,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_minus,                  5)
 	TAGKEYS(                        XK_egrave,                 6)
 	TAGKEYS(                        XK_underscore,             7)
-	TAGKEYS(                        XK_ccedilla,                8)
+	TAGKEYS(                        XK_ccedilla,               8)
 };
 
 /* button definitions */
