@@ -1485,6 +1485,7 @@ void
 runAutostart(void) {
 	system ("feh --bg-fill ~/.config/wall.png &");
 	system ("xcompmgr &");
+    system ("slstatus &");
 }
 
 void

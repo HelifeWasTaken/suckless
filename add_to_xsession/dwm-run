@@ -1,6 +1,2 @@
 #!/bin/sh
 dwm
-
-if [ $(which slstatus) ]; then
-    slstatus
-fi
