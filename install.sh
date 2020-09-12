@@ -47,11 +47,13 @@ check_optional()
 
 	if [ ! -f "~/.config/wall.png" ]; then
 		echo "WARNING : Did not found a wallpaper in ~/.config/wall.png setting up the default one of this build"
-		mv wall.png ~/.config/wall.png
+		cp wall.png ~/.config/wall.png
 	fi
 
 	if [ -f "/usr/bin/dash" ]; then
 		ln -svf dash /bin/sh
+    else
+        echo "Consider using dash for faster results with #!/bin/sh"
 	fi
 }
 
@@ -68,6 +70,7 @@ build()
 	cd dwm && sh install.sh && cd ..
 	cd st && sh install.sh && cd ..
 	cd slstatus && sh install.sh && cd ..
+    cd add_to_xsession/ && sudo make install && cd ..
 }
 
 main()
