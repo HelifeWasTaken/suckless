@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ libxcb\ libXft\ libX11\ libXft\ libXinerama-devel\ libXinerama\ libX11-devel\ libXft-devel
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ libxcb\ libXft\ libX11\ libXft\ libXinerama-devel\ libXinerama\ libX11-devel\ libXft-devel\ alsa-lib-devel
 
 download_package()
 {

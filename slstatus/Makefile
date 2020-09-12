@@ -1,66 +1,61 @@
-# See LICENSE file for copyright and license details
-# slstatus - suckless status monitor
-.POSIX:
+# See LICENSE file for copyright and license details.
 
 include config.mk
 
-REQ = util
-COM =\
-	components/battery\
-	components/cpu\
-	components/datetime\
-	components/disk\
-	components/entropy\
-	components/hostname\
-	components/ip\
-	components/kernel_release\
-	components/keyboard_indicators\
-	components/load_avg\
-	components/num_files\
-	components/ram\
-	components/run_command\
-	components/swap\
-	components/temperature\
-	components/uptime\
-	components/user\
-	components/volume\
-	components/wifi
+NAME=slstatus
 
-all: slstatus
+SRC = ${NAME}.c
+OBJ = ${SRC:.c=.o}
 
-slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
-slstatus.o: slstatus.c slstatus.h arg.h config.h $(REQ:=.h)
-$(COM:=.o): config.mk $(REQ:=.h)
+all: options ${NAME}
 
-config.h:
-	cp config.def.h $@
-
-.o:
-	$(CC) -o $@ $(LDFLAGS) $< $(COM:=.o) $(REQ:=.o) $(LDLIBS)
+options:
+	@echo ${NAME} build options:
+	@echo "CFLAGS   = ${CFLAGS}"
+	@echo "LDFLAGS  = ${LDFLAGS}"
+	@echo "CC       = ${CC}"
 
 .c.o:
-	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+	@echo CC $<
+	@${CC} -c ${CFLAGS} $<
+
+${OBJ}: config.h config.mk
+
+config.h:
+	@echo creating $@ from config.def.h
+	@cp config.def.h $@
+
+${NAME}: ${OBJ}
+	@echo CC -o $@
+	@${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
-	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o)
+	@echo cleaning
+	@rm -f ${NAME} ${OBJ} ${NAME}-${VERSION}.tar.gz
 
-dist:
-	rm -rf "slstatus-$(VERSION)"
-	mkdir -p "slstatus-$(VERSION)/components"
-	cp -R LICENSE Makefile README config.mk config.def.h \
-	      arg.h slstatus.c $(COM:=.c) $(REQ:=.c) $(REQ:=.h) \
-	      slstatus.1 "slstatus-$(VERSION)"
-	tar -cf - "slstatus-$(VERSION)" | gzip -c > "slstatus-$(VERSION).tar.gz"
-	rm -rf "slstatus-$(VERSION)"
+dist: clean
+	@echo creating dist tarball
+	@mkdir -p ${NAME}-${VERSION}
+	@cp -R Makefile config.mk LICENSE \
+		${SRC} ${NAME}-${VERSION}
+	@tar -cf ${NAME}-${VERSION}.tar ${NAME}-${VERSION}
+	@gzip ${NAME}-${VERSION}.tar
+	@rm -rf ${NAME}-${VERSION}
 
 install: all
-	mkdir -p "$(DESTDIR)$(PREFIX)/bin"
-	cp -f slstatus "$(DESTDIR)$(PREFIX)/bin"
-	chmod 755 "$(DESTDIR)$(PREFIX)/bin/slstatus"
-	mkdir -p "$(DESTDIR)$(MANPREFIX)/man1"
-	cp -f slstatus.1 "$(DESTDIR)$(MANPREFIX)/man1"
-	chmod 644 "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+	@echo installing executable file to ${DESTDIR}${PREFIX}/bin
+	@mkdir -p ${DESTDIR}${PREFIX}/bin
+	@cp -f ${NAME} ${DESTDIR}${PREFIX}/bin
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/${NAME}
+	@echo installing manual page to ${DESTDIR}${MANPREFIX}/man1
+	@mkdir -p ${DESTDIR}${MANPREFIX}/man1
+	@sed "s/VERSION/${VERSION}/g" < ${NAME}.1 > ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
+	@chmod 644 ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
 
 uninstall:
-	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
-	rm -f "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+	@echo removing executable file from ${DESTDIR}${PREFIX}/bin
+	@rm -f ${DESTDIR}${PREFIX}/bin/${NAME}
+	@echo removing manual page from ${DESTDIR}${MANPREFIX}/man1
+	@rm -f ${DESTDIR}${MANPREFIX}/man1/${NAME}.1
+
+.PHONY: all options clean dist install uninstall
