@@ -10,13 +10,13 @@ To compile :
 
 - Make
 - cc or gcc
-- base-devel 
+- base-devel
 > (no need for now but I might add python or other stuff in it to be sure)
 
-Apps that I use at dwm startup : 
+Apps that I use at dwm startup :
 - feh (Gives me my background)
 - xcompmgr (Enable RGBA)
 
-Dependencies are automatically built with Fedora 30 and higher I still need to check for the other distributions
+Dependencies are automatically built with Fedora 30 and higher
 
 In order to change the wallpaper you can change the path or command in `suckless/dwm/dwm.c` search for `system ("feh --bg-fill ~/.config/wall.png &");` or just change/add the image and reload the wm
