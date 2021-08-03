@@ -11,7 +11,8 @@ download_package()
 {
 	echo "Downloading dependencies"
 
-	return { sudo dnf install $DEPENDENCIES; }
+	sudo dnf install $DEPENDENCIES
+	if [[ $? -ne 0 ]]; then; exit 1; fi
 }
 
 build_vim_package()
@@ -20,32 +21,23 @@ build_vim_package()
 
 	sudo dnf copr enable agriffis/neovim-nightly
 	sudo dnf install neovim
-	mkdir -p ~/.config && cp -r nvim ~/.config
+	mkdir -p ~/.config && cp -r nvim ~/.config && ln -svf ~/.vimrc ~/.config/nvim/init.vim
+}
+
+assert_binary_existence()
+{
+	if [ ! -f "$1" ]; then
+		echo "ERROR : You do not have /usr/bin/$1 installed"
+		exit 1
+	fi
 }
 
 check_essential()
 {
-	if [ ! -f "/usr/bin/xcompmgr" ]; then
-		echo "ERROR : You do not have xcompmgr installed"
-		exit 1
-	fi
-
-	if [ ! -f "/usr/bin/gcc" ]; then
-		if [ ! -f "/usr/bin/cc" ]; then
-			echo "ERROR : You do not have gcc or cc to compile the build"
-			exit 1
-		fi
-	fi
-
-	if [ ! -f "/usr/bin/make" ]; then
-		echo "ERROR : You do not have make to compile the build"
-		exit 1
-	fi
-
-	if [ ! -f "/usr/bin/dash" ]; then
-		echo "ERROR : You do not have Dash to complete the build"
-		exit 1
-	fi
+	assert_binary_existence "xcompmgr"
+	assert_binary_existence "gcc"
+	assert_binary_existence "make"
+	assert_binary_existence "dash"
 }
 
 check_optional()
@@ -90,15 +82,10 @@ build()
 	cd add_to_xsession/ && sudo make install && cd ..
 }
 
-main()
-{
-	download_package
-	if [[ $? -ne 0 ]]; then; exit 1; fi
-	check_essential
-	build_vim_package
-	check_optional
-	build
-	create_xinitrc
-}
-
-main
+download_package
+check_essential
+build_vim_package
+check_optional
+build
+create_xinitrc
+cp .bashrc .zshrc $HOME
