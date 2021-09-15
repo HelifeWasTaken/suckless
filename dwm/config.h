@@ -124,16 +124,16 @@ static Key keys[] = {
     { 0,                           XF86XK_AudioRaiseVolume,   spawn, {.v = upvolume   } },
     { 0,                           XF86XK_AudioMute,          spawn, {.v = mutevolume } },
 
-    TAGKEYS(                        19,              0)
-    TAGKEYS(                        10,              1)
-    TAGKEYS(                        11,              2)
-    TAGKEYS(                        12,              3)
-    TAGKEYS(                        13,              4)
-    TAGKEYS(                        14,              5)
-    TAGKEYS(                        15,              6)
-    TAGKEYS(                        16,              7)
-    TAGKEYS(                        17,              8)
-    TAGKEYS(                        18,              9)
+    TAGKEYS(                        XK_1,                      0)
+    TAGKEYS(                        XK_2,                      1)
+    TAGKEYS(                        XK_3,                      2)
+    TAGKEYS(                        XK_4,                      3)
+    TAGKEYS(                        XK_5,                      4)
+    TAGKEYS(                        XK_6,                      5)
+    TAGKEYS(                        XK_7,                      6)
+    TAGKEYS(                        XK_8,                      7)
+    TAGKEYS(                        XK_9,                      8)
+
     TAGKEYS(                        XK_ampersand,              0)
     TAGKEYS(                        XK_eacute,                 1)
     TAGKEYS(                        XK_quotedbl,               2)
