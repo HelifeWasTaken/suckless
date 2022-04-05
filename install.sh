@@ -5,28 +5,28 @@
 # Last Modified Date: 29.05.2021
 # Last Modified By  : Mattis DALLEAU <mattisdalleau@gmail.com>
 
-DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ libxcb\ libXft\ libX11\ libXft\ libXinerama-devel\ libXinerama\ libX11-devel\ libXft-devel\ alsa-lib-devel
+DEPENDENCIES=feh\ xcompmgr\ gcc\ make\ ranger\ dash\ w3m\ w3m-img\ libxcb\ libXft\ libX11\ libXft\ libXinerama-devel\ libXinerama\ libX11-devel\ libXft-devel\ alsa-lib-devel\ zsh
 
 download_package()
 {
 	echo "Downloading dependencies"
 
 	sudo dnf install $DEPENDENCIES
-	if [[ $? -ne 0 ]]; then; exit 1; fi
+	if [[ $? -ne 0 ]]; then exit 1; fi
 }
 
 build_vim_package()
 {
 	echo "Downloading (n)vim packages"
 
-	sudo dnf copr enable agriffis/neovim-nightly
-	sudo dnf install neovim
-	mkdir -p ~/.config && cp -r nvim ~/.config && ln -svf ~/.vimrc ~/.config/nvim/init.vim
+	sudo dnf copr enable agriffis/neovim-nightly -y
+	sudo dnf install neovim -y
+	mkdir -p ~/.config && cp .vimrc ~ && cp -r nvim ~/.config && ln -svf ~/.vimrc ~/.config/nvim/init.vim
 }
 
 assert_binary_existence()
 {
-	if [ ! -f "$1" ]; then
+	if [ ! -f "/bin/$1" ]; then
 		echo "ERROR : You do not have /usr/bin/$1 installed"
 		exit 1
 	fi
@@ -71,6 +71,11 @@ create_xinitrc()
 		mv ~/.xinitrc ~/.xinitrc_backup
 	fi
 	echo -e "exec slstatus &\nexec dwm" > ~/.xinitrc
+}
+
+build_zsh()
+{
+	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 build()
